@@ -1,24 +1,19 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AddEventForm from './components/AddEventForm/AddEventForm';
+import EventDetail from './components/EventDetail/EventDetail';
+import EventsList from './components/EventsList/EventsList';
 
-const App = () => {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/events" element={<EventsList />} />
+        <Route path="/events/:id" element={<EventDetail />} />
+        <Route path="/add-event" element={<AddEventForm />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
