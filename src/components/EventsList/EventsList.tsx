@@ -4,6 +4,7 @@ import EventIcon from '@mui/icons-material/Event';
 import { useNavigate } from 'react-router-dom';
 import { EventData } from '../../interfaces/eventInterfaces';
 import axios from 'axios';
+import './EventsList.scss'
 
 const EventsList: React.FC = () => {
     const [events, setEvents] = useState<EventData[]>([]);
@@ -51,63 +52,66 @@ const EventsList: React.FC = () => {
     };
 
     return (
-        <Box sx={{ padding: 2 }}>
-            <Typography variant="h4" gutterBottom>
-                Events List
-            </Typography>
-            <Button variant="contained" color="primary" onClick={handleAddEvent}>
-                Add Event
-            </Button>
-            <FormControl variant="outlined" sx={{ minWidth: 120, marginBottom: 2 }}>
-                <InputLabel id="items-per-page-label">Items per page</InputLabel>
-                <Select
-                    labelId="items-per-page-label"
-                    value={itemsPerPage}
-                    onChange={handleItemsPerPageChange}
-                    label="Items per page"
-                >
-                    <MenuItem value={5}>5</MenuItem>
-                    <MenuItem value={10}>10</MenuItem>
-                    <MenuItem value={20}>20</MenuItem>
-                    <MenuItem value={50}>50</MenuItem>
-                </Select>
-            </FormControl>
-            <List>
-                {getPaginatedEvents().map(event => (
-                    <ListItem key={event.id} alignItems="flex-start" button onClick={() => handleItemClick(event.id)}>
-                        <ListItemAvatar>
-                            <Avatar>
-                                <EventIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText
-                            primary={event.title}
-                            secondary={
-                                <>
-                                    <Typography
-                                        sx={{ display: 'inline' }}
-                                        component="span"
-                                        variant="body2"
-                                        color="text.primary"
-                                    >
-                                        {event.date}
-                                    </Typography>
-                                    {" — " + event.description}
-                                </>
-                            }
-                        />
-                    </ListItem>
-                ))}
-            </List>
-            <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}>
-                <Pagination
-                    count={Math.ceil(events.length / itemsPerPage)}
-                    page={currentPage}
-                    onChange={handlePageChange}
-                    color="primary"
-                />
+        <div className="list-wrapper">
+            <Box sx={{ padding: 2 }}>
+                <Typography variant="h4" gutterBottom>
+                    Events List
+                </Typography>
+
+                <FormControl variant="outlined" sx={{ marginBottom: 2, display: 'flex' }}>
+                    <InputLabel id="items-per-page-label">Items per page</InputLabel>
+                    <Select
+                        labelId="items-per-page-label"
+                        value={itemsPerPage}
+                        onChange={handleItemsPerPageChange}
+                        label="Items per page"
+                    >
+                        <MenuItem value={5}>5</MenuItem>
+                        <MenuItem value={10}>10</MenuItem>
+                        <MenuItem value={20}>20</MenuItem>
+                        <MenuItem value={50}>50</MenuItem>
+                    </Select>
+                </FormControl>
+                <List>
+                    {getPaginatedEvents().map(event => (
+                        <ListItem key={event.id} alignItems="flex-start" button onClick={() => handleItemClick(event.id)}>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <EventIcon />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary={event.title}
+                                secondary={
+                                    <>
+                                        <Typography
+                                            sx={{ display: 'inline' }}
+                                            component="span"
+                                            variant="body2"
+                                            color="text.primary"
+                                        >
+                                            {event.date}
+                                        </Typography>
+                                        {" — " + event.description}
+                                    </>
+                                }
+                            />
+                        </ListItem>
+                    ))}
+                </List>
+                <Button sx={{ width: '100%' }} variant="contained" color="primary" onClick={handleAddEvent}>
+                    Add Event
+                </Button>
+                <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}>
+                    <Pagination
+                        count={Math.ceil(events.length / itemsPerPage)}
+                        page={currentPage}
+                        onChange={handlePageChange}
+                        color="primary"
+                    />
+                </Box>
             </Box>
-        </Box>
+        </div>
     );
 };
 

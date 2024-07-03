@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, Typography, Button } from '@mui/material';
 import axios from 'axios';
 import { EventData } from '../../interfaces/eventInterfaces';
+import { format } from 'date-fns';
 
 const EventDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -36,7 +37,8 @@ const EventDetail: React.FC = () => {
         <Card>
             <CardContent>
                 <Typography variant="h5">{event?.title}</Typography>
-                <Typography>{`${event?.date} ${event?.time}`}</Typography>
+                <Typography>{format(new Date(event.date), 'dd.MM.yyyy')}</Typography>
+                <Typography>{event.time}</Typography>
                 <Typography>{event?.description}</Typography>
                 <Typography>{event?.category}</Typography>
                 <Typography>{event?.phoneNumber}</Typography>

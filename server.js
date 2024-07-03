@@ -16,7 +16,8 @@ for (let i = 1; i <= 50; i++) {
     events.push({
         id: i,
         title: `Event ${i}`,
-        dateTime: `2024-07-${i < 10 ? '0' + i : i} 10:00`, 
+        date: `2024-07-${i < 10 ? '0' + i : i}`, 
+        time: `10:00`,
         description: `Description of Event ${i}`,
         image: `https://placeimg.com/400/300/${i}`, 
         category: categories[i % categories.length],

@@ -8,6 +8,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<EventsList />} />
         <Route path="/events" element={<EventsList />} />
         <Route path="/events/:id" element={<EventDetail />} />
         <Route path="/add-event" element={<AddEventForm />} />
