@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { List, ListItem, ListItemText, ListItemAvatar, Avatar, Typography, Pagination, Box, Select, MenuItem, FormControl, InputLabel, SelectChangeEvent, Button } from '@mui/material';
+import { List, ListItem, ListItemText, ListItemAvatar, Avatar, Typography, Pagination, Box, Select, MenuItem, FormControl, InputLabel, SelectChangeEvent, Button, CircularProgress } from '@mui/material';
 import EventIcon from '@mui/icons-material/Event';
 import { useNavigate } from 'react-router-dom';
 import { EventData } from '../../interfaces/eventInterfaces';
@@ -10,6 +10,8 @@ const EventsList: React.FC = () => {
     const [events, setEvents] = useState<EventData[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+    const [loading, setLoading] = useState<boolean>(true);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,6 +20,7 @@ const EventsList: React.FC = () => {
 
     const fetchEvents = async () => {
         try {
+            setLoading(true);
             const response = await axios.get('http://localhost:3001/events');
             if (response.status !== 200) {
                 throw new Error('Network response was not ok');
@@ -25,6 +28,10 @@ const EventsList: React.FC = () => {
             setEvents(response.data);
         } catch (error) {
             console.error('Error fetching events:', error);
+        } finally {
+            setTimeout(() => {
+                setLoading(false);
+            }, 500);
         }
     };
 
@@ -72,44 +79,53 @@ const EventsList: React.FC = () => {
                         <MenuItem value={50}>50</MenuItem>
                     </Select>
                 </FormControl>
-                <List>
-                    {getPaginatedEvents().map(event => (
-                        <ListItem key={event.id} alignItems="flex-start" button onClick={() => handleItemClick(event.id)}>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <EventIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary={event.title}
-                                secondary={
-                                    <>
-                                        <Typography
-                                            sx={{ display: 'inline' }}
-                                            component="span"
-                                            variant="body2"
-                                            color="text.primary"
-                                        >
-                                            {event.date}
-                                        </Typography>
-                                        {" — " + event.description}
-                                    </>
-                                }
+
+                {loading ? (
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+                        <CircularProgress />
+                    </Box>
+                ) : (
+                    <>
+                        <List>
+                            {getPaginatedEvents().map(event => (
+                                <ListItem key={event.id} alignItems="flex-start" button onClick={() => handleItemClick(event.id)}>
+                                    <ListItemAvatar>
+                                        <Avatar>
+                                            <EventIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                        primary={event.title}
+                                        secondary={
+                                            <>
+                                                <Typography
+                                                    sx={{ display: 'inline' }}
+                                                    component="span"
+                                                    variant="body2"
+                                                    color="text.primary"
+                                                >
+                                                    {event.date}
+                                                </Typography>
+                                                {" — " + event.description}
+                                            </>
+                                        }
+                                    />
+                                </ListItem>
+                            ))}
+                        </List>
+                        <Button sx={{ width: '100%' }} variant="contained" color="primary" onClick={handleAddEvent}>
+                            Add Event
+                        </Button>
+                        <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}>
+                            <Pagination
+                                count={Math.ceil(events.length / itemsPerPage)}
+                                page={currentPage}
+                                onChange={handlePageChange}
+                                color="primary"
                             />
-                        </ListItem>
-                    ))}
-                </List>
-                <Button sx={{ width: '100%' }} variant="contained" color="primary" onClick={handleAddEvent}>
-                    Add Event
-                </Button>
-                <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}>
-                    <Pagination
-                        count={Math.ceil(events.length / itemsPerPage)}
-                        page={currentPage}
-                        onChange={handlePageChange}
-                        color="primary"
-                    />
-                </Box>
+                        </Box>
+                    </>
+                )}
             </Box>
         </div>
     );

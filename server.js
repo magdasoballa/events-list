@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
 app.use(cors());
-const port = 3001;
+const port = 3002;
 let events = [];
 
 const categories = ['Sport', 'Kultura', 'Zdrowie'];
@@ -19,7 +19,7 @@ for (let i = 1; i <= 50; i++) {
         date: `2024-07-${i < 10 ? '0' + i : i}`, 
         time: `10:00`,
         description: `Description of Event ${i}`,
-        image: `https://placeimg.com/400/300/${i}`, 
+        image: `https://picsum.photos/400/300?random=${i}`,
         category: categories[i % categories.length],
         phoneNumber: `123-456-${i}`,
         email: `contact${i}@example.com`,
