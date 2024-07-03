@@ -88,7 +88,7 @@ const EventsList: React.FC = () => {
                     <>
                         <List>
                             {getPaginatedEvents().map(event => (
-                                <ListItem key={event.id} alignItems="flex-start" button onClick={() => handleItemClick(event.id)}>
+                                <ListItem key={event.id} alignItems="flex-start" button onClick={() => handleItemClick(event.id as number)}>
                                     <ListItemAvatar>
                                         <Avatar>
                                             <EventIcon />

@@ -1,5 +1,5 @@
 export interface EventData {
-    id: number;
+    id?: number;
     title: string;
     date: string;
     time: string;

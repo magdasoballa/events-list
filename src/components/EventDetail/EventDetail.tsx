@@ -37,44 +37,44 @@ const EventDetail: React.FC = () => {
             <CardContent style={{ padding: '16px' }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
-                        {event.title && (
+                        {event?.title && (
                             <Typography variant="h5" style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '8px' }}>
-                                {event.title}
+                                {event?.title}
                             </Typography>
                         )}
-                        {event.category && (
+                        {event?.category && (
                             <Typography style={{ marginBottom: '8px' }}>
-                                Category: {event.category}
+                                Category: {event?.category}
                             </Typography>
                         )}
-                        {event.date && (
+                        {event?.date && (
                             <Typography style={{ marginBottom: '8px' }}>
-                                Date: {format(new Date(event.date), 'dd.MM.yyyy')}
+                                Date: {format(new Date(event?.date), 'dd.MM.yyyy')}
                             </Typography>
                         )}
-                        {event.time && (
+                        {event?.time && (
                             <Typography style={{ marginBottom: '8px' }}>
-                                Time: {event.time}
+                                Time: {event?.time}
                             </Typography>
                         )}
-                        {event.description && (
+                        {event?.description && (
                             <Typography style={{ marginBottom: '8px' }}>
-                                Description: {event.description}
+                                Description: {event?.description}
                             </Typography>
                         )}
-                        {event.phoneNumber && (
+                        {event?.phoneNumber && (
                             <Typography style={{ marginBottom: '8px' }}>
-                                Phone: {event.phoneNumber}
+                                Phone: {event?.phoneNumber}
                             </Typography>
                         )}
-                        {event.email && (
+                        {event?.email && (
                             <Typography style={{ marginBottom: '8px' }}>
-                                Email: {event.email}
+                                Email: {event?.email}
                             </Typography>
                         )}
-                        {event.location && (
+                        {event?.location && (
                             <Typography style={{ marginBottom: '8px' }}>
-                                Location: {event.location}
+                                Location: {event?.location}
                             </Typography>
                         )}
                         <Button
@@ -87,7 +87,7 @@ const EventDetail: React.FC = () => {
                         </Button>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        {event.image && (
+                        {event?.image && (
                             <img src={event.image} style={{ width: '100%', height: 'auto' }} />
                         )}
                     </Grid>
