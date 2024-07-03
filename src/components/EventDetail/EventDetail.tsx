@@ -88,7 +88,7 @@ const EventDetail: React.FC = () => {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         {event?.image && (
-                            <img src={event.image} style={{ width: '100%', height: 'auto' }} />
+                            <img src={event.image} style={{ width: '100%', height: 'auto' }} alt="event" />
                         )}
                     </Grid>
                 </Grid>

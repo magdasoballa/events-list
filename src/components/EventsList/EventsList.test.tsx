@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import EventsList from './EventsList';
 import axios from 'axios';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -19,7 +19,7 @@ describe('EventsList', () => {
     });
 
     test('renders the Events List title', async () => {
-        await act(async () => {
+        await (async () => {
             render(
                 <Router>
                     <EventsList />
@@ -30,7 +30,7 @@ describe('EventsList', () => {
     });
 
     test('renders event items', async () => {
-        await act(async () => {
+        await (async () => {
             render(
                 <Router>
                     <EventsList />
@@ -42,7 +42,7 @@ describe('EventsList', () => {
     });
 
     test('renders Add Event button', async () => {
-        await act(async () => {
+        await (async () => {
             render(
                 <Router>
                     <EventsList />

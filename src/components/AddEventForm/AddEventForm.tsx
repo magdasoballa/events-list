@@ -3,7 +3,7 @@ import { TextField, Button, Grid, MenuItem, Select, InputLabel, FormControl, Typ
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './AddEventForm.scss'
-import { Formik, Form, Field, FormikHelpers } from 'formik';
+import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { EventData } from '../../interfaces/eventInterfaces';
 
