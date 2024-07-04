@@ -2,38 +2,38 @@ import React, { useEffect, useState } from 'react';
 import { List, ListItem, ListItemText, ListItemAvatar, Avatar, Typography, Pagination, Box, Select, MenuItem, FormControl, InputLabel, SelectChangeEvent, Button, CircularProgress } from '@mui/material';
 import EventIcon from '@mui/icons-material/Event';
 import { useNavigate } from 'react-router-dom';
-import { EventData } from '../../interfaces/eventInterfaces';
 import axios from 'axios';
 import './EventsList.scss'
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { setEvents } from '../../redux/events/eventSlice';
 
 const EventsList: React.FC = () => {
-    const [events, setEvents] = useState<EventData[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [itemsPerPage, setItemsPerPage] = useState<number>(10);
     const [loading, setLoading] = useState<boolean>(true);
-
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const events = useSelector((state: RootState) => state.events.events);
 
     useEffect(() => {
-        fetchEvents();
-    }, []);
-
-    const fetchEvents = async () => {
-        try {
-            setLoading(true);
-            const response = await axios.get('http://localhost:3001/events');
-            if (response.status !== 200) {
-                throw new Error('Network response was not ok');
-            }
-            setEvents(response.data);
-        } catch (error) {
-            console.error('Error fetching events:', error);
-        } finally {
-            setTimeout(() => {
+        const fetchEvents = async () => {
+            try {
+                const response = await axios.get('http://localhost:3001/events');
+                if (response.status === 200) {
+                    dispatch(setEvents(response.data));
+                } else {
+                    console.error('Network response was not ok');
+                }
+            } catch (error) {
+                console.error('Error fetching events:', error);
+            } finally {
                 setLoading(false);
-            }, 500);
-        }
-    };
+            }
+        };
+
+        fetchEvents();
+    }, [dispatch]);
 
     const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
         setCurrentPage(page);
