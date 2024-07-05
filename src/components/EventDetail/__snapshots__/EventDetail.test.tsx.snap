@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventDetail component should render event details correctly 1`] = `
+<div>
+  <h6
+    class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+  >
+    Event not found!
+  </h6>
+</div>
+`;
+
+exports[`EventDetail component should render event details correctly and navigate on button click 1`] = `
+<div>
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-bhp9pd-MuiPaper-root-MuiCard-root"
+  >
+    <div
+      class="MuiCardContent-root css-46bh2p-MuiCardContent-root"
+      data-testid="event"
+      style="padding: 16px;"
+    >
+      <div
+        class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+      >
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 css-1b3l6lk-MuiGrid-root"
+        >
+          <h5
+            class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
+            style="font-size: 1.2rem; font-weight: bold; margin-bottom: 8px;"
+          >
+            Event 1
+          </h5>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+            style="margin-bottom: 8px;"
+          >
+            Category: 
+            Kultura
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+            style="margin-bottom: 8px;"
+          >
+            Date: 
+            07.01.2024
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+            style="margin-bottom: 8px;"
+          >
+            Time: 
+            10:00
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+            style="margin-bottom: 8px;"
+          >
+            Description: 
+            Description of Event 1
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+            style="margin-bottom: 8px;"
+          >
+            Phone: 
+            123-456-1
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+            style="margin-bottom: 8px;"
+          >
+            Email: 
+            sample@example.com
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+            style="margin-bottom: 8px;"
+          >
+            Location: 
+            Location 1
+          </p>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-sghohy-MuiButtonBase-root-MuiButton-root"
+            style="margin-top: 16px;"
+            tabindex="0"
+            type="button"
+          >
+            Back to Events List
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 css-1b3l6lk-MuiGrid-root"
+        >
+          <img
+            alt="event"
+            src="http://example.com/sample.jpg"
+            style="width: 100%; height: auto;"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

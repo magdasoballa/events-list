@@ -43,7 +43,7 @@ const EventDetail: React.FC = () => {
 
     return (
         <Card>
-            <CardContent style={{ padding: '16px' }}>
+            <CardContent style={{ padding: '16px' }} data-testid="event">
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         {event?.title && (

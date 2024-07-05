@@ -3,7 +3,7 @@ import { List, ListItem, ListItemText, ListItemAvatar, Avatar, Typography, Pagin
 import EventIcon from '@mui/icons-material/Event';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './EventsList.scss'
+import './EventsList.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { setEvents } from '../../redux/events/eventSlice';
@@ -45,6 +45,9 @@ const EventsList: React.FC = () => {
     };
 
     const getPaginatedEvents = () => {
+        if (!events || !Array.isArray(events)) {
+            return [];
+        }
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         return events.slice(startIndex, endIndex);
@@ -118,7 +121,7 @@ const EventsList: React.FC = () => {
                         </Button>
                         <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}>
                             <Pagination
-                                count={Math.ceil(events.length / itemsPerPage)}
+                                count={Math.ceil((events?.length || 0) / itemsPerPage)}
                                 page={currentPage}
                                 onChange={handlePageChange}
                                 color="primary"
