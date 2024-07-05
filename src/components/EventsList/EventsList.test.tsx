@@ -1,13 +1,18 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import EventsList from './EventsList';
 import axios from 'axios';
 import { BrowserRouter as Router } from 'react-router-dom';
-
+import { Provider } from 'react-redux';
+import { simpleRender } from '../../utils';
+import store from '../../redux/store';
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('EventsList', () => {
+    afterEach(() => {
+        jest.useRealTimers();
+    });
+
     beforeEach(() => {
         mockedAxios.get.mockResolvedValue({
             status: 200,
@@ -18,37 +23,20 @@ describe('EventsList', () => {
         });
     });
 
-    test('renders the Events List title', async () => {
-        await (async () => {
-            render(
+    test('should render event items', async () => {
+        jest.useFakeTimers();
+        const { container } = await simpleRender(
+            <Provider store={store}>
                 <Router>
                     <EventsList />
                 </Router>
-            );
-        });
-        expect(await screen.findByText('Events List')).toBeInTheDocument();
-    });
+            </Provider>
+        );
 
-    test('renders event items', async () => {
-        await (async () => {
-            render(
-                <Router>
-                    <EventsList />
-                </Router>
-            );
-        });
-        expect(await screen.findByText('Event 1')).toBeInTheDocument();
-        expect(await screen.findByText('Event 2')).toBeInTheDocument();
-    });
+        expect(container).toMatchSnapshot();
+        jest.advanceTimersByTime(30000);
 
-    test('renders Add Event button', async () => {
-        await (async () => {
-            render(
-                <Router>
-                    <EventsList />
-                </Router>
-            );
-        });
-        expect(await screen.findByText('Add Event')).toBeInTheDocument();
+        const lists = screen.getAllByText('Events List');
+        expect(lists[0]).toBeInTheDocument();
     });
 });

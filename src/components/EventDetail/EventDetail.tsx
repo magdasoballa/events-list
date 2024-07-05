@@ -32,6 +32,15 @@ const EventDetail: React.FC = () => {
     if (!event) {
         return <Typography variant="h6">Event not found!</Typography>;
     }
+
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) {
+            return 'Invalid Date';
+        }
+        return format(date, 'dd.MM.yyyy');
+    };
+
     return (
         <Card>
             <CardContent style={{ padding: '16px' }}>
@@ -49,7 +58,7 @@ const EventDetail: React.FC = () => {
                         )}
                         {event?.date && (
                             <Typography style={{ marginBottom: '8px' }}>
-                                Date: {format(new Date(event?.date), 'dd.MM.yyyy')}
+                                Date: {formatDate(event?.date)}
                             </Typography>
                         )}
                         {event?.time && (
@@ -93,7 +102,6 @@ const EventDetail: React.FC = () => {
                     </Grid>
                 </Grid>
             </CardContent>
-
         </Card>
     );
 };
